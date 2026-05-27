@@ -69,8 +69,29 @@ void create_tree(node **root) {
     // Your code to initialize the tree goes here
 }
 
-void print_tree(node *root) {
-    // Your code to print goes here
+void print_tree(node *root, int level) {
+    if (root == NULL) {
+        return;
+    }
+
+    for (int i = 0; i < level; i++) {
+        printf("  ");
+    }
+
+    printf("| ");
+
+    for (int i = 0; i < root->pokemon_count; i++) {
+        printf("%s ", root->pokemon_array[i]);
+    }
+    printf("|\n");
+    
+    if (!root->is_leaf) {
+        for (int i = 0; i < root->pokemon_count + 1; i++) {
+            if (root->children[i] == NULL)
+                break;
+            print_tree(root->children[i], level + 1);
+        }
+    }
 }
 
 void destroy_tree(node *root) {
