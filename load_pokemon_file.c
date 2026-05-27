@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "load_pokemon_file.h"
 
 FILE* load_pokemon_file() {
     FILE *pokemon;
