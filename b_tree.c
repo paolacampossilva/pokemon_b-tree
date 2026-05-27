@@ -66,7 +66,15 @@ void insert_child(node *parent, node *child) {
 }
 
 void create_tree(node **root) {
-    // Your code to initialize the tree goes here
+    char poke_name[STRING_SYZE];
+
+    FILE *pokemon = load_pokemon_file();
+
+    while (fgets(poke_name, STRING_SYZE, pokemon) != NULL) {
+        insert_tree(root, poke_name);
+    }
+
+    close_pokemon_file(pokemon);
 }
 
 void print_tree(node *root, int level) {
@@ -97,4 +105,3 @@ void print_tree(node *root, int level) {
 void destroy_tree(node *root) {
     // Your code to free memory goes here
 }
-
