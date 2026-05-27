@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "menu.h"
 
 int menu() {
     int op;
@@ -14,4 +15,23 @@ int menu() {
     printf("\n");
 
     return op;
+}
+
+void run_options(int d) {
+    while (1) {
+        switch(menu()) {
+            case 1: // Buscar
+                break;
+            
+            case 2: // Inserir
+                break;
+
+            case 9: // Finalizar
+                exit(0);
+
+            default:
+                printf("\nOpcao invalida! Tente novamente...\n");
+                break;
+        }
+    }
 }
