@@ -60,6 +60,43 @@ void split_child(node *parent, int index, node *child) {
 
 void insert_tree(node **root, char *pokemon) {
     // Your code to insert goes here
+
+    /* 
+
+    - insercao realizada nos nodes folhas (node->is_leaf == 1)
+        - se a chave ja existe, entao a insercao eh invalida (search_tree() == 1)
+
+    - situacoes a serem consideradas:
+        - arvore vazia
+            - criar e preencher um novo node
+            - primeira chave: criacao do node raiz
+            - demais chaves: insercao ate a capacidade de limite do node
+        - overflow na raiz
+            - nova chave nao cabe no raiz node (cheio)
+            - 1 passo: split do node
+                - chaves distribuidas uniformemente entre os nodes
+                - realiza a insercao da nova chave
+            - 2 passo: criacao de uma nova raiz
+                - qual a chave separadora?
+            - 3 passo: promocao da chave
+                - a primeira chave do novo node resultate do split (criado) eh promovida para o node raiz
+        - insercao no node folha
+            - 1 passo: busca
+                - percorrer a arvore ate encontrar o node folha para inserir a nova chave
+            - 2 passo: insercao
+                - se o node possui espaco, a chave eh inserida de forma ordenada
+                - node cheio: split
+            - split do node folha:
+                - criacao de um novo node
+                - distribuicao uniforme entre os dois nodes
+                - promocao da primeira chave do novo node como chave separadora no node pai
+                - ajuste do node pai para apontar para o novo node
+                - propagacao de overflow
+    
+    - fato curioso:
+        - a arvore B nao cresce pra baixo que nem as outras arvores, adicionando no final dela e vai crescendo, ela na verdade cresce pra cima sempre com a criacao de uma nova raiz
+    
+    */
 }
 
 void insert_child(node *parent, node *child) {
