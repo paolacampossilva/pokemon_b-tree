@@ -35,3 +35,15 @@ void run_options(int d) {
         }
     }
 }
+
+int get_d() {
+    int d;
+
+    printf("-------------------------------\n");
+    printf("\nEntre com o 'd' desejado: ");
+    scanf("%d", &d);
+    printf("\n");
+    printf("-------------------------------\n");
+
+    return d;
+}

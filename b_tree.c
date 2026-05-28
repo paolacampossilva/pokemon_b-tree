@@ -19,7 +19,7 @@ node* new_node(int children_count, int size) {
 
             if (new->pokemon_array != NULL) return new;
             
-            free(new->pokemon_array)
+            free(new->pokemon_array);
         }
         free(new->children);
     } 
@@ -78,27 +78,22 @@ void create_tree(node **root) {
     close_pokemon_file(pokemon);
 }
 
-void print_tree(node *root, int level) {
-    if (root == NULL) {
-        return;
-    }
+void print_tree(node *root, int level, int max_children) {
+    if (root == NULL) return;
 
-    for (int i = 0; i < level; i++) {
+    for (int i = 0; i < level; i++) 
         printf("  ");
-    }
 
     printf("| ");
-
-    for (int i = 0; i < root->pokemon_count; i++) {
+    for (int i = 0; i < root->pokemon_count; i++)
         printf("%s ", root->pokemon_array[i]);
-    }
     printf("|\n");
     
     if (!root->is_leaf) {
-        for (int i = 0; i < root->pokemon_count + 1; i++) {
+        for (int i = 0; i < max_children; i++) {
             if (root->children[i] == NULL) break;
 
-            print_tree(root->children[i], level + 1);
+            print_tree(root->children[i], level + 1, max_children);
         }
     }
 }
@@ -110,4 +105,8 @@ void destroy_tree(node *root, int max_children) {
         destroy_tree(root->children[i], max_children);
 
     free(root->pokemon_array); free(root->children); free(root);
+}
+
+int get_max_children(int d) {
+    return (2 * d) + 1;
 }

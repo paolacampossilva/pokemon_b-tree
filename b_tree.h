@@ -9,7 +9,8 @@ node* search_tree(node *root, char *poke_name);
 void insert_tree(node **root, char *pokemon);
 void split_child(node *parent, int index, node *child);
 void insert_child(node *parent, node *child);
-void print_tree(node *root, int level);
-void destroy_tree(node *root);
+void print_tree(node *root, int level, int d);
+void destroy_tree(node *root, int max_children);
+int get_max_children(int d);
 
 #endif

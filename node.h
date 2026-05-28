@@ -11,4 +11,11 @@ struct node{
 
 }; typedef struct  node node;
 
+/* Ideia de sruct
+struct tree {
+    node* root;
+    int d;
+};
+*/
+
 #endif

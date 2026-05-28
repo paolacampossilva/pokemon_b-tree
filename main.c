@@ -12,13 +12,7 @@ João Pedro Huppes Arenales
 */
 
 int main() {
-    int d;
-
-    printf("Entre com o 'd' desejado: ");
-    scanf("%d", &d);
-    printf("\n");
-
-    run_options(d);
+    run_options(get_d());
 
     return 0;
 }
