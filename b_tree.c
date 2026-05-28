@@ -17,8 +17,9 @@ node* new_node(int children_count, int size) {
 
             new->pokemon_array = (char (*) [STRING_SYZE]) malloc(size * sizeof(char[STRING_SYZE]));
 
-            if (new->pokemon_array != NULL) 
-                return new;
+            if (new->pokemon_array != NULL) return new;
+            
+            free(new->pokemon_array)
         }
         free(new->children);
     } 
@@ -28,16 +29,16 @@ node* new_node(int children_count, int size) {
 }
 
 node* search_tree(node *root, char *poke_name) {
-    node *p = root;
+    node *p = root; 
     int index;
+
     while (p != NULL){
         index = search_in_node(p, poke_name);
         
-        if (index < p->pokemon_count && strcmp(poke_name, p->pokemon_array[index]) == 0) 
-            return p;
+        if (index < p->pokemon_count && strcmp(poke_name, p->pokemon_array[index]) == 0) return p;
         
-        if (p->is_leaf)
-            return NULL;
+        if (p->is_leaf) return NULL;
+
         p = p->children[index];
     }
     return NULL;
@@ -46,8 +47,8 @@ node* search_tree(node *root, char *poke_name) {
 int search_in_node(node* node, char *poke_name){
     int i = 0;
     while (i < node->pokemon_count){
-        if (strcmp(node->pokemon_array[i],poke_name) > 0)
-            break;
+        if (strcmp(node->pokemon_array[i],poke_name) > 0) break;
+
         i++;
     }
     return i;
@@ -95,13 +96,18 @@ void print_tree(node *root, int level) {
     
     if (!root->is_leaf) {
         for (int i = 0; i < root->pokemon_count + 1; i++) {
-            if (root->children[i] == NULL)
-                break;
+            if (root->children[i] == NULL) break;
+
             print_tree(root->children[i], level + 1);
         }
     }
 }
 
-void destroy_tree(node *root) {
-    // Your code to free memory goes here
+void destroy_tree(node *root, int max_children) {
+    if (root == NULL) return;
+    
+    for (int i = 0; i < max_children; i++)
+        destroy_tree(root->children[i], max_children);
+
+    free(root->pokemon_array); free(root->children); free(root);
 }
